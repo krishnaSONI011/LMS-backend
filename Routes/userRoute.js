@@ -33,6 +33,7 @@ Router.post('/add-user',async (req,res)=>{
             status:true,
             message:'New User',
             user:{
+                id:user._id,
                 firstname: user.firstname,
                 lastname: user.lastname,
                 email: user.email
@@ -54,6 +55,7 @@ Router.post('/login',async (req,res)=>{
                     status:true,
                     message:'Login',
                     user:{
+                        id:user._id,
                         firstname:user.firstname,
                         lastname:user.lastname,
                         email:user.email

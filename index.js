@@ -4,6 +4,7 @@ const db = require('./db')
 const userRoutes = require('./Routes/userRoute')
 const cors = require('cors')
 const courseRouter = require('./Routes/coursesRouter')
+const todoRouter = require('./Routes/todoRouter')
 const app =express()
 // middlewares
 app.use('/uploads', express.static('uploads'));
@@ -24,4 +25,5 @@ app.get('/' , (req,res) =>{
     res.send("back side")
 })
 app.use('/api/user',userRoutes);
-app.use('/api/course',courseRouter)
+app.use('/api/course',courseRouter);
+app.use('/api/todo',todoRouter)

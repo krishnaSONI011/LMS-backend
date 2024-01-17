@@ -3,7 +3,7 @@ const mongo = require('mongoose')
 const todoSchema = mongo.Schema({
     userId:{
         
-            type:mongoose.ObjectId,
+            type:mongo.ObjectId,
             ref:"User",
             required:true
         
