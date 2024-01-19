@@ -5,6 +5,7 @@ const userRoutes = require('./Routes/userRoute')
 const cors = require('cors')
 const courseRouter = require('./Routes/coursesRouter')
 const todoRouter = require('./Routes/todoRouter')
+const attendenceRouter = require('./Routes/attendenceRouter')
 const app =express()
 // middlewares
 app.use('/uploads', express.static('uploads'));
@@ -27,3 +28,4 @@ app.get('/' , (req,res) =>{
 app.use('/api/user',userRoutes);
 app.use('/api/course',courseRouter);
 app.use('/api/todo',todoRouter)
+app.use('/api/attendence',attendenceRouter)
