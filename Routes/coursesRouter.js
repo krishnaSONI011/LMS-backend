@@ -16,10 +16,12 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage })
 Router.post('/add-course',upload.single('image'),async (req,res)=>{
     try {
-        const {title,description} = req.body
-        const slug = toSlug(title)
+        const {title,subTitle,description} = req.body
+        
+        const slug = await toSlug(title)
         const course = new courseModel({
             title,
+            subTitle,
             logo:req.file.path,
             description,
             slug:slug

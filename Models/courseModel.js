@@ -5,6 +5,10 @@ const courseShema =  mongo.Schema({
     type:String,
     require
    },
+   subTitle:{
+      type:String,
+      require
+   },
    logo:{
     type:String,
     
@@ -17,6 +21,10 @@ const courseShema =  mongo.Schema({
     type:String,
     require,
     unique:true
+   },
+   live:{
+      type:Boolean,
+      default:false,
    }
 });
 module.exports = mongo.model('courses',courseShema)
