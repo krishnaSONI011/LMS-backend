@@ -52,6 +52,18 @@ Router.get('/get',async (req,res)=>{
         
     }
 })
+Router.get('/get-frontend',async (req,res)=>{
+    try {
+        const courses = await courseModel.find({live:true})
+        return res.status(200).json({
+            status:true,
+            courses
+        })
+    } catch (error) {
+        console.log(error)
+        
+    }
+})
 
 Router.get('/get/:slug',async (req,res)=>{
     try{
@@ -69,5 +81,35 @@ Router.get('/get/:slug',async (req,res)=>{
         console.log(err)
     }
 })
+
+Router.put('/update-course/:status/:id', async (req, res) => {
+    try {
+        const live = req.params.status;
+        const id = req.params.id;
+        const updateData = await courseModel.findByIdAndUpdate(id, {
+            live: live
+        }, { new: true }); // Move { new: true } to the correct position
+
+        if (updateData) {
+            res.status(200).json({
+                status: true,
+                message: updateData.live,
+            });
+        } else {
+            res.status(404).json({
+                status: false,
+                message: "Course not found",
+            });
+        }
+
+    } catch (e) {
+        console.log(e);
+        res.status(500).json({
+            status: false,
+            message: "Internal Server Error",
+        });
+    }
+});
+
 
 module.exports = Router

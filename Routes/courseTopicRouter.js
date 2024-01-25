@@ -6,7 +6,7 @@ const courseTopicModel = require('../Models/courseTopicModel');
 
 Router.post('/add-topic',async (req,res)=>{
     try{
-        const {topic,videoEmbed} = req.body;
+        const {courseId,topic,videoEmbed} = req.body;
         const topics = new courseTopicModel({
             courseId,topic,videoEmbed
         })
@@ -27,3 +27,18 @@ Router.post('/add-topic',async (req,res)=>{
     })
     }
 })
+Router.get('/get-topic/:id',async (req,res)=>{
+    try{
+        const {id} = req.params;
+        const data = await courseTopicModel.find({courseId:id})
+        return res.status(200).json({
+            status:true,
+            message:"getting data",
+            data
+        })
+    }catch(e){
+        console.log(e)
+    }
+})
+
+module.exports = Router
