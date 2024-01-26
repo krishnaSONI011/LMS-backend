@@ -11,4 +11,4 @@ const EnrollSchema = mongo.Schema({
     }
 },{timestamps: true })
 
-module.exports = mongo.Model('enrolls',EnrollSchema)
+module.exports = mongo.model('enrolls',EnrollSchema)

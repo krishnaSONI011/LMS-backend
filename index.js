@@ -7,6 +7,7 @@ const courseRouter = require('./Routes/coursesRouter')
 const todoRouter = require('./Routes/todoRouter')
 const attendenceRouter = require('./Routes/attendenceRouter')
 const courseTopicRouter = require('./Routes/courseTopicRouter')
+const enrollRouter = require('./Routes/enrollRouter')
 const app =express()
 // middlewares
 app.use('/uploads', express.static('uploads'));
@@ -31,3 +32,4 @@ app.use('/api/course',courseRouter);
 app.use('/api/todo',todoRouter)
 app.use('/api/attendence',attendenceRouter)
 app.use('/api/topics',courseTopicRouter)
+app.use('/api/enroll',enrollRouter)
