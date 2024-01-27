@@ -111,5 +111,17 @@ Router.put('/update-course/:status/:id', async (req, res) => {
     }
 });
 
+Router.get('/get-course/:id',async (req,res)=>{
+    try{
+        const {id} = req.params
+        const course = await courseModel.findById({_id:id})
+        return res.status(200).json({
+            status:true,
+            course
+        })
+    }catch(e){
+        console.log(e)
+    }
+})
 
 module.exports = Router
