@@ -18,6 +18,21 @@ Router.post('/new-enroll', async (req, res) => {
                     message: "You are already registered",
                 });
             }
+            else {
+                const enroll = new enrollModel({
+                    userId, courseId
+                });
+    
+                const savedEnrollment = await enroll.save();
+    
+                if (savedEnrollment) {
+                    return res.status(200).json({
+                        status: true,
+                        message: "You are enrolled",
+                    });
+                }
+            }
+            
         } else {
             const enroll = new enrollModel({
                 userId, courseId
