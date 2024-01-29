@@ -40,5 +40,21 @@ Router.get('/get-topic/:id',async (req,res)=>{
         console.log(e)
     }
 })
+Router.get('/get/:Topicid',async (req,res)=>{
+    try{
+        const {Topicid} = req.params;
+        const topic = await courseTopicModel.findById({_id:Topicid})
+        return res.status(200).json({
+            status:true,
+            topic
+        })
+    }catch(e){
+        console.log(e)
+        return res.status(500).json({
+            status:false,
+            message:"Internal server error"
+        })
+    }
+})
 
 module.exports = Router
