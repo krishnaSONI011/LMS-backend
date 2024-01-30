@@ -1,14 +1,24 @@
 const express = require('express')
 const Router = express.Router();
 const multer = require('multer');
+const path = require('path')
 const courseTopicModel = require('../Models/courseTopicModel');
+const storage = multer.diskStorage({
+    destination: function (req, res, cb) {
+        cb(null, 'uploads')
+    },
+    filename: function (req, file, cb) {
+        const uniqueName = Date.now() + path.extname(file.originalname);
+        cb(null, uniqueName)
+    }
+});
+const upload = multer({ storage: storage })
 
-
-Router.post('/add-topic',async (req,res)=>{
+Router.post('/add-topic',upload.single('video'),async (req,res)=>{
     try{
-        const {courseId,topic,videoEmbed} = req.body;
+        const {courseId,topic} = req.body;
         const topics = new courseTopicModel({
-            courseId,topic,videoEmbed
+            courseId,topic,videoEmbed:req.file.path
         })
         const save = await topics.save();
         if(save) return res.status(200).json({
