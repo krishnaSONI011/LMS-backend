@@ -16,6 +16,10 @@ const userSchema = mongo.Schema({
     password:{
         type:String,
         require
+    },
+    online:{
+        type:Boolean,
+        default:false
     }
 });
 module.exports= mongo.model('users',userSchema);
