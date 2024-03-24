@@ -20,6 +20,10 @@ const userSchema = mongo.Schema({
     online:{
         type:Boolean,
         default:false
+    },
+    avatar:{
+        type:String,
+        default:"/images/avatar5.png"
     }
 });
 module.exports= mongo.model('users',userSchema);

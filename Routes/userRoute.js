@@ -47,7 +47,9 @@ Router.post('/add-user',async (req,res)=>{
                 id:user._id,
                 firstname: user.firstname,
                 lastname: user.lastname,
-                email: user.email
+                email: user.email,
+                avatar: user.avatar
+
             }
         })
     }catch(err){
@@ -73,7 +75,8 @@ Router.post('/login', async (req, res) => {
                         firstname: user.firstname,
                         lastname: user.lastname,
                         email: user.email,
-                        online: true // Include online status in the response
+                        online: true, // Include online status in the response
+                        avatar:user.avatar
                     }
                 });
             } else {
@@ -150,4 +153,65 @@ Router.get('/get-all',async (req,res)=>{
         console.log(e)
     }
 })
+Router.post('/update-avatar', async (req, res) => {
+    try {
+        const userId = req.body.userId; // Assuming userId is sent in the request body
+        const avatarImg = req.body.avatarImg; // Assuming avatarImg is sent in the request body
+
+        // Update avatar for the user
+        await userModel.findByIdAndUpdate(userId, { avatar: avatarImg });
+
+        // Find the updated user
+        const user = await userModel.findById(userId);
+
+        // Return the updated user data
+        return res.status(200).json({
+            status: true,
+            message: 'Avatar updated successfully',
+            user: {
+                id: user._id,
+                firstname: user.firstname,
+                lastname: user.lastname,
+                email: user.email,
+                online: true,
+                avatar: user.avatar
+            }
+        });
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json({
+            status: false,
+            message: "Something went wrong"
+        });
+    }
+});
+
+Router.post('/update-user',async (req,res)=>{
+    try{
+        const {userId,firstname,lastname,email} = req.body;
+         await userModel.findByIdAndUpdate(userId,{firstname:firstname,lastname:lastname,email:email})
+        const user = await userModel.findById(userId);
+
+        // Return the updated user data
+        return res.status(200).json({
+            status: true,
+            message: 'updated successfully',
+            user: {
+                id: user._id,
+                firstname: user.firstname,
+                lastname: user.lastname,
+                email: user.email,
+                online: true,
+                avatar: user.avatar
+            }
+        });
+    }catch(e){
+        console.log(e);
+        return res.status(500).json({
+            status: false,
+            message: "Something went wrong"
+        });
+    }
+})
+
 module.exports = Router;

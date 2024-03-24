@@ -4,6 +4,7 @@ const mailSchema = mongo.Schema({
     senderMail:{
         type:String
     },
+    userName:{type:String},
     reciverMail:{
         type:String
     },
