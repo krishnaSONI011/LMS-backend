@@ -63,5 +63,26 @@ Router.get('/single-mail/:mailId',async (req,res)=>{
         })
     }
 })
+Router.post('/delete-mail',async (req,res)=>{
+    try{
+        const {userMailId,mailIds} = req.body
+        
+        for(let i of mailIds){
+            await mailModel.findByIdAndDelete({_id:i})
+        }
+        const userMails = await mailModel.find({reciverMail:userMailId})
+         return res.status(200).json({
+            status:true,
+            message:"mail deleted",
+            userMails
+        })
+    }catch(e){
+        console.log(e)
+        return res.status(500).json({
+            status:false,
+            message:"somthing went wrong"
+        })
+    }
+})
 
 module.exports = Router
