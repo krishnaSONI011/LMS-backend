@@ -9,6 +9,7 @@ const attendenceRouter = require('./Routes/attendenceRouter')
 const courseTopicRouter = require('./Routes/courseTopicRouter')
 const enrollRouter = require('./Routes/enrollRouter')
 const mailRouter = require('./Routes/mailRouter')
+const watchedVideoRouter = require('./Routes/watchedVideoRouter')
 const app =express()
 // middlewares
 app.use('/uploads', express.static('uploads'));
@@ -35,3 +36,4 @@ app.use('/api/attendence',attendenceRouter)
 app.use('/api/topics',courseTopicRouter)
 app.use('/api/enroll',enrollRouter)
 app.use('/api/mail',mailRouter)
+app.use('/api/checked',watchedVideoRouter)
